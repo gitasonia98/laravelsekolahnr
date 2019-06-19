@@ -13,4 +13,6 @@
 
 Route::get('/', function () {
     return view('welcome');
-});
+}); 
+//route siswa yang mengarahkan ke SiswaController function index
+Route::get('/siswa','SiswaController@index');
