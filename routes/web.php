@@ -16,6 +16,6 @@ Route::get('/', function () {
 }); 
 
 Route::get('/siswa','SiswaController@index');
-
-
-Route::post('/siswa/create', 'SiswaController@create');
+Route::post('/siswa/create', 'SiswaController@create'); //untuk submit form pake method post"
+Route::get('/siswa/{id}/edit','SiswaController@edit');
+Route::post('/siswa/{id}/update','SiswaController@update'); //update buat di controller

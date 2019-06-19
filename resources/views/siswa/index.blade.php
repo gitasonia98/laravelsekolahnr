@@ -37,6 +37,7 @@
 		<th>JENIS KELAMIN</th>
 		<th>AGAMA</th>
 		<th>ALAMAT</th>
+		<th>AKSI</th>
 	</tr>
 <!--AKHIR HEADER , header yg diatas kesampping, kalau td yang kebawah-->
 	@foreach($data_siswa as $siswa)
@@ -46,6 +47,7 @@
 		<td>{{$siswa->jenis_kelamin}}</td>
 		<td>{{$siswa->agama}}</td>
 		<td>{{$siswa->alamat}}</td>
+		<td><a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a></td> <!--untuk tombol edit, yang didalam kurung buat sorot warna nya-->
 	</tr>
 	@endforeach
 </table>
@@ -70,12 +72,12 @@
 
 	  <div class="form-group">
 	    <label for="exampleInputEmail1">Nama Depan</label>
-	    <input name="nama_depan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="nama depan">
+	    <input name="nama_depan" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
 	  </div>
 
 	  <div class="form-group">
 	    <label for="exampleInputEmail1">Nama Belakang</label>
-	    <input name="nama_belakang" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="nama belakang">
+	    <input name="nama_belakang" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
 	  </div>
 
 	<div class="form-group">
@@ -88,7 +90,7 @@
 
 	  <div class="form-group">
 	    <label for="exampleInputEmail1">Agama</label>
-	    <input name="agama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="agama">
+	    <input name="agama" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="">
 	  </div>
 
 	<div class="form-group">
