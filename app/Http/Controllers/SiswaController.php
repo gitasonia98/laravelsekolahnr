@@ -7,11 +7,17 @@ use Illuminate\Http\Request;
 
 class SiswaController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {	
     	//untuk cek
-    	
-    	$data_siswa = \App\Siswa::all();
+        if($request->has('cari')){
+            $data_siswa = \App\Siswa::where('nama_depan','LIKE','%' .$request->cari. '%')->get();
+        }
+        else
+        {
+            $data_siswa= \App\Siswa::all();
+        }
+    	// dd($request)->all();
     	//siswa itu nama folder, index nama filenya
     	return view('siswa.index',['data_siswa' => $data_siswa]); 
     }
