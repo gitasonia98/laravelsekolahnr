@@ -1,52 +1,56 @@
 @extends('layouts.master') <!--menarik dari file master-->
-@section('content') <!--harus sama dg isi yield di master-->
-	@if(session('sukses'))
-	<div class="alert alert-success" role="alert">
-	{{session('sukses')}}
-	</div>
-	@endif
-	<div class="row">
-	<div class ="col-6">
-	<h1>DATA SISWA </h1>
-	</div>
 
+@section('content')
+ <div class="main">
+ 	<div class="content">
+ 		<div class="container-fluid">
+ 			<div class="row">
+ 				<div class="col-md-12">
+ 					<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Data Siswa</h3>
+									<div class="right">
+									<button type="button" class="btn" data-toggle="modal" data-target="#exampleModal">Tambah Data Siswa <i class="lnr lnr-plus-circle"></i></button>
+										
+									</div>
+									<!-- Button trigger modal -->
+								</div>
+								<div class="panel-body">
+									<table class="table table-hover">
+										<thead>
+											<tr>
+											<th>NAMA DEPAN</th>
+											<th>NAMA BELAKANG</th>
+											<th>JENIS KELAMIN</th>
+											<th>AGAMA</th>
+											<th>ALAMAT</th>
+											<th>AKSI</th>
+										</tr>
+										</thead>
+										<tbody>
+											@foreach($data_siswa as $siswa)
+											<tr>
+												<td>{{$siswa->nama_depan}}</td>
+												<td>{{$siswa->nama_belakang}}</td>
+												<td>{{$siswa->jenis_kelamin}}</td>
+												<td>{{$siswa->agama}}</td>
+												<td>{{$siswa->alamat}}</td>
+												<td>
+													<a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a> <!--untuk tombol edit, yang didalam kurung buat sorot warna nya-->
+													<a href="/siswa/{{$siswa->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin dihapus ?')" >Delete</a>
+												</td> 
+											</tr>
+											@endforeach
+										</tbody>
+									</table>
+								</div>
+							</div>
+ 				</div>
+ 			</div>
+ 		</div>
+ 	</div>
+ </div>
 
-<div class="col-6">	
-<!-- Button trigger modal -->
-<button type="button" class="btn btn-primary  btn-sm float-right" data-toggle="modal" data-target="#exampleModal">
-  Tambah Data Siswa
-</button>
-</div>
-
-	
-	<!--HEADER-->
-	<table class="table table-hover"> 
-	<tr>
-		<th>NAMA DEPAN</th>
-		<th>NAMA BELAKANG</th>
-		<th>JENIS KELAMIN</th>
-		<th>AGAMA</th>
-		<th>ALAMAT</th>
-		<th>AKSI</th>
-	</tr>
-<!--AKHIR HEADER , header yg diatas kesampping, kalau td yang kebawah-->
-	@foreach($data_siswa as $siswa)
-	<tr>
-		<td>{{$siswa->nama_depan}}</td>
-		<td>{{$siswa->nama_belakang}}</td>
-		<td>{{$siswa->jenis_kelamin}}</td>
-		<td>{{$siswa->agama}}</td>
-		<td>{{$siswa->alamat}}</td>
-		<td>
-			<a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a> <!--untuk tombol edit, yang didalam kurung buat sorot warna nya-->
-			<a href="/siswa/{{$siswa->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin dihapus ?')" >Delete</a>
-		</td> 
-	</tr>
-	@endforeach
-</table>
-
-</div>
-</div>
 
 <!-- Modal -->
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -107,5 +111,4 @@
 
 </body>
 </html>
-
-@endsection
+@stop 
