@@ -20,7 +20,7 @@
 										<thead>
 											<tr>
 											<th>NAMA DEPAN</th>
-											<th>NAMA BELAKANG</th>
+								 			<th>NAMA BELAKANG</th>
 											<th>JENIS KELAMIN</th>
 											<th>AGAMA</th>
 											<th>ALAMAT</th>
@@ -28,14 +28,14 @@
 										</tr>
 										</thead>
 										<tbody>
-											@foreach($data_siswa as $siswa)
-											<tr>
-												<td>{{$siswa->nama_depan}}</td>
-												<td>{{$siswa->nama_belakang}}</td>
-												<td>{{$siswa->jenis_kelamin}}</td>
-												<td>{{$siswa->agama}}</td>
-												<td>{{$siswa->alamat}}</td>
-												<td>
+			@foreach($data_siswa as $siswa)
+			<tr>
+				<td><a href="/siswa/{{$siswa->id}}/profile">{{$siswa->nama_depan}}</a></td>
+				<td><a href="/siswa/{{$siswa->id}}/profile">{{$siswa->nama_belakang}}</a></td>
+				<td>{{$siswa->jenis_kelamin}}</td>
+				<td>{{$siswa->agama}}</td>
+				<td>{{$siswa->alamat}}</td>
+				<td>
 													<a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning btn-sm">Edit</a> <!--untuk tombol edit, yang didalam kurung buat sorot warna nya-->
 													<a href="/siswa/{{$siswa->id}}/delete" class="btn btn-danger btn-sm" onclick="return confirm('Yakin Ingin dihapus ?')" >Delete</a>
 												</td> 

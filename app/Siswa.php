@@ -12,6 +12,17 @@ class Siswa extends Model
    	'nama_belakang',
    	'jenis_kelamin',
    	'agama',
-   	'alamat'
+   	'alamat',
+   	'avatar'
    ];
+
+   public function getAvatar()
+   
+    {
+    	if(!$this->avatar){
+    		return asset('images/default.png');
+    	}
+
+    	return asset('images/'.$this->avatar);
+    }
 }
