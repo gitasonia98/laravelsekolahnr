@@ -20,6 +20,8 @@
   <!-- ICONS -->
   <link rel="apple-touch-icon" sizes="76x76" href="assets/img/apple-icon.png">
   <link rel="icon" type="image/png" sizes="96x96" href="assets/img/favicon.png">
+
+  @yield('header')
 </head>
 
 <body>
@@ -49,6 +51,7 @@
   <script src="{{asset('admin/assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js')}}"></script>
   <script src="{{asset('admin/assets/scripts/klorofil-common.js')}}"></script>
   
+  @yield('footer')
 </body>
 
 </html>

@@ -1,13 +1,37 @@
 <!-- GANTI DEFAULT AVATAR JADI GAMBAR ORANG KOSONG  -->
-
+<!-- TAMBAH LINE 10  SMPE 12 -->
 @extends('layouts.master')
+
+@section('header')
+<link href="//cdnjs.cloudflare.com/ajax/libs/x-editable/1.5.0/bootstrap3-editable/css/bootstrap-editable.css" rel="stylesheet"/>
+@stop
+
+
 @section('content')
+
+
+
+</script>
 
 		<!-- MAIN -->
 		<div class="main">
 			<!-- MAIN CONTENT -->
 			<div class="main-content">
 				<div class="container-fluid">
+
+				@if(session('sukses'))
+				<div class="alert alert-success" role="alert">
+				  {{session('sukses')}}
+				</div>
+				@endif
+
+				@if(session('error'))
+				<div class="alert alert-danger" role="alert">
+				  {{session('error')}}
+				</div>
+				@endif
+
+
 					<div class="panel panel-profile">
 						<div class="clearfix">
 							<!-- LEFT COLUMN -->
@@ -23,7 +47,7 @@
 									<div class="profile-stat">
 										<div class="row">
 											<div class="col-md-4 stat-item">
-												45 <span>Projects</span>
+												{{$siswa->mapel->count()}}<span>Mata Pelajaran</span>
 											</div>
 											<div class="col-md-4 stat-item">
 												15 <span>Awards</span>
@@ -46,51 +70,53 @@
 											
 										</ul>
 									</div>
-									
-									
-									<div class="text-center"><a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning">Edit Profile</a></div>
+
+									<div class="text-center"><a href="/siswa/{{$siswa->id}}/edit" class="btn btn-warning">Edit Profile</a>
+									</div>
 								</div>
 								<!-- END PROFILE DETAIL -->
 							</div>
 							<!-- END LEFT COLUMN -->
-							<!-- RIGHT COLUMN -->
-							<div class="profile-right">
-								
-								<!-- AWARDS -->
-								
-								<!-- END AWARDS -->
-								<!-- TABBED CONTENT -->
-								<div class="custom-tabs-line tabs-line-bottom left-aligned">
-									<ul class="nav" role="tablist">
-										<li class="active"><a href="#tab-bottom-left1" role="tab" data-toggle="tab">Aktivitas Terakhir</a></li>
-										
-									</ul>
+		<!-- RIGHT COLUMN -->
+		<div class="profile-right">
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+		  Tambah Nilai
+		</button>
+
+								<div class="panel">
+								<div class="panel-heading">
+									<h3 class="panel-title">Mata Pelajaran</h3>
 								</div>
-								<div class="tab-content">
-									<div class="tab-pane fade in active" id="tab-bottom-left1">
-										<ul class="list-unstyled activity-timeline">
-											<li>
-												<i class="fa fa-comment activity-icon"></i>
-												<p>Commented on post <a href="#">Prototyping</a> <span class="timestamp">2 minutes ago</span></p>
-											</li>
-											<li>
-												<i class="fa fa-cloud-upload activity-icon"></i>
-												<p>Uploaded new file <a href="#">Proposal.docx</a> to project <a href="#">New Year Campaign</a> <span class="timestamp">7 hours ago</span></p>
-											</li>
-											<li>
-												<i class="fa fa-plus activity-icon"></i>
-												<p>Added <a href="#">Martin</a> and <a href="#">3 others colleagues</a> to project repository <span class="timestamp">Yesterday</span></p>
-											</li>
-											<li>
-												<i class="fa fa-check activity-icon"></i>
-												<p>Finished 80% of all <a href="#">assigned tasks</a> <span class="timestamp">1 day ago</span></p>
-											</li>
-										</ul>
-										<div class="margin-top-30 text-center"><a href="#" class="btn btn-default">See all activity</a></div>
-									</div>
-									
+								<div class="panel-body">
+									<table class="table table-striped">
+										<thead>
+											<tr>
+												<th>KODE</th>
+												<th>NAMA</th>
+												<th>SEMESTER</th>
+												<th>NILAI</th>
+
+											</tr>
+										</thead>
+										<tbody>
+	@foreach($siswa->mapel as $mapel)
+	<tr>
+		<td>{{$mapel->kode}}</td>
+		<td>{{$mapel->nama}}</td>
+		<td>{{$mapel->semester}}</td>
+		<td><a href="#" id="username" data-type="text" data-pk="{{$mapel->id}}" data-url="/post" data-title="Masukan Nilai">{{$mapel->pivot->nilai}}</a></td>
+	</tr>
+	@endforeach
+											
+										</tbody>
+									</table>
 								</div>
-								<!-- END TABBED CONTENT -->
+							</div>
+
+							<div class="panel">
+								<div id="chartNilai"></div>
+							</div>
 							</div>
 							<!-- END RIGHT COLUMN -->
 						</div>
@@ -98,23 +124,94 @@
 				</div>
 			</div>
 			<!-- END MAIN CONTENT -->
-		</div>
-		<!-- END MAIN -->
-		<div class="clearfix"></div>
-		<footer>
-			<div class="container-fluid">
-				<p class="copyright">Shared by <i class="fa fa-love"></i><a href="https://bootstrapthemes.co">BootstrapThemes</a>
-</p>
-			</div>
-		</footer>
-	</div>
-	<!-- END WRAPPER -->
-	<!-- Javascript -->
-	<script src="assets/vendor/jquery/jquery.min.js"></script>
-	<script src="assets/vendor/bootstrap/js/bootstrap.min.js"></script>
-	<script src="assets/vendor/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-	<script src="assets/scripts/klorofil-common.js"></script>
-</body>
 
-</html>
+			
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Tambah Nilai</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+
+		<form action="/siswa/{{$siswa->id}}/addnilai" method="POST" enctype="multipart/form-data">
+		      {{csrf_field()}}
+
+	<div class="form-group">
+    <label for="mapel">Mata Pelajaran</label>
+    <select class="form-control" id="mapel" name="mapel">
+      @foreach($matapelajaran as $mp)
+      			<option value="{{$mp->id}}">{{$mp->nama}}</option>
+      @endforeach
+    </select>
+    </div>
+
+	  <div class="form-group{{$errors->has('nama_depan') ? ' has-error' : '' }}">
+		    <label for="exampleInputEmail1">Nilai</label>
+		    <input name="nilai" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="" value="{{old('nilai')}}">
+
+		    @if($errors->has('nilai'))
+		    <span class="help-block">{{$errors->first('nilai')}}	</span>
+		    @endif
+		    </div>
+	
+      </div>
+      <div class="modal-footer">
+        <button type="submit" class="btn btn-primary">Simpan</button>
+      </form>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+@stop
+
+@section('footer')
+<script src="https://code.highcharts.com/highcharts.js"></script>
+<script>
+	Highcharts.chart('chartNilai', {
+    chart: {
+        type: 'column'
+    },
+    title: {
+        text: 'Laporan Nilai Siswa'
+    },
+    xAxis: {
+        categories:{!!json_encode($categories)!!},
+        crosshair: true
+    },
+    yAxis: {
+        min: 0,
+        title: {
+            text: 'Nilai'
+        }
+    },
+    tooltip: {
+        headerFormat: '<span style="font-size:10px">{point.key}</span><table>',
+ 
+        footerFormat: '</table>',
+        shared: true,
+        useHTML: true
+    },
+    plotOptions: {
+        column: {
+            pointPadding: 0.2,
+            borderWidth: 0
+        }
+    },
+    series: [{
+        name: 'Nilai',
+        data: {!!json_encode($data)!!}
+
+    }]
+});
+</script>
 @stop
