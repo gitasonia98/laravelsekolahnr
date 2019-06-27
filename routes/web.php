@@ -29,4 +29,5 @@ Route::post('/siswa/{id}/update','SiswaController@update'); //update buat di con
 Route::get('/siswa/{id}/delete','SiswaController@delete');
 Route::get('/siswa/{id}/profile','SiswaController@profile');
 Route::post('/siswa/{id}/addnilai','SiswaController@addnilai');
+Route::get('/siswa/{id}/{idmapel}/deletenilai','SiswaController@deletenilai');
 });
