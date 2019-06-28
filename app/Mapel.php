@@ -19,4 +19,10 @@ class Mapel extends Model
     	return $this->belongsToMany(Siswa::class);
     }
 
+      public function guru()
+    {
+      return $this->belongsTo(Guru::class); //satu guru dimiliki banyak mapel
+    }
+
+
 }
